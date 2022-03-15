@@ -1,0 +1,58 @@
+query ProtcolMetrics {
+  protocolMetrics(first: 100, orderBy: timestamp, orderDirection: desc) {
+    id
+    runway5k
+    timestamp
+    ohmPrice
+    runway10k
+    runway20k
+    runway50k
+    marketCap
+    currentAPY
+    totalSupply
+    runway7dot5k
+    runway2dot5k
+    runwayCurrent
+    nextEpochRebase
+    totalValueLocked
+    treasuryOhmDaiPOL
+    treasuryOhmFraxPOL
+    nextDistributedOhm
+    treasuryMarketValue
+    treasuryTotalBacking
+    ohmCirculatingSupply
+    sOhmCirculatingSupply
+    treasuryRiskFreeValue
+    treasuryDaiMarketValue
+    treasuryUstMarketValue
+    treasuryFraxMarketValue
+    treasuryWETHMarketValue
+    treasuryLusdMarketValue
+    treasuryWBTCMarketValue
+    treasuryDaiRiskFreeValue
+    treasuryOtherMarketValue
+    treasuryLusdRiskFreeValue
+    treasuryXsushiMarketValue
+    treasuryFraxRiskFreeValue
+  }
+}
+
+query {
+  _meta {
+    block {
+      number
+    }
+  }
+  protocolMetrics(first: 1, orderBy: timestamp, orderDirection: desc) {
+    timestamp
+    ohmCirculatingSupply
+    sOhmCirculatingSupply
+    totalSupply
+    ohmPrice
+    marketCap
+    totalValueLocked
+    treasuryMarketValue
+    nextEpochRebase
+    nextDistributedOhm
+  }
+}
