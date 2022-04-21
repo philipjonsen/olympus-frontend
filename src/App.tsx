@@ -50,6 +50,7 @@ import NotFound from "./views/404/NotFound";
 import { BondModalContainer } from "./views/Bond/components/BondModal/BondModal";
 import GrantInfo from "./views/Give/GrantInfo";
 import ProjectInfo from "./views/Give/ProjectInfo";
+import Guidance from "./views/Guidance";
 
 // 😬 Sorry for all the console logging
 const DEBUG = false;
@@ -332,7 +333,7 @@ function App() {
               <Route path="/v1-stake">
                 <V1Stake oldAssetsDetected={oldAssetsDetected} setMigrationModalOpen={setMigrationModalOpen} />
               </Route>
-
+              <Route path="/guidance" component={Guidance} />
               <Route exact path="/give">
                 <Give />
               </Route>
