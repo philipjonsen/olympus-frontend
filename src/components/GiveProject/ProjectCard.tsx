@@ -58,6 +58,7 @@ type ProjectDetailsProps = {
   project: Project;
   giveAssetType: string;
   changeAssetType: ChangeAssetType;
+  changeComponent: (newComponent: string) => void;
   mode: ProjectDetailsMode;
 };
 
@@ -68,7 +69,13 @@ const ZERO_NUMBER: DecimalBigNumber = new DecimalBigNumber("0");
 const DEFAULT_FORMAT = { decimals: DECIMAL_PLACES, format: true };
 const NO_DECIMALS_FORMAT = { decimals: 0, format: true };
 
-export default function ProjectCard({ project, giveAssetType, changeAssetType, mode }: ProjectDetailsProps) {
+export default function ProjectCard({
+  project,
+  giveAssetType,
+  changeAssetType,
+  changeComponent,
+  mode,
+}: ProjectDetailsProps) {
   const useStyles = makeStyles<Theme>(theme => ({
     progress: {
       backgroundColor: () => (theme.palette.type === "dark" ? theme.colors.primary[300] : theme.colors.gray[700]),
@@ -375,7 +382,12 @@ export default function ProjectCard({ project, giveAssetType, changeAssetType, m
     // For the moment, we only display the first photo
     else {
       imageElement = (
-        <Link href={`#/give/projects/${project.slug}`} onClick={() => handleProjectDetailsButtonClick("Image")}>
+        <Link
+          onClick={() => {
+            changeComponent(project.slug);
+            handleProjectDetailsButtonClick("Title Link");
+          }}
+        >
           <img width="100%" src={`${process.env.PUBLIC_URL}${photos[0]}`} />
         </Link>
       );
@@ -501,8 +513,10 @@ export default function ProjectCard({ project, giveAssetType, changeAssetType, m
           {!isBreakpointLarge ? (
             <Grid item xs={12}>
               <Link
-                href={`#/give/projects/${project.slug}`}
-                onClick={() => handleProjectDetailsButtonClick("Title Link")}
+                onClick={() => {
+                  changeComponent(project.slug);
+                  handleProjectDetailsButtonClick("Title Link");
+                }}
               >
                 <Typography variant="h4">
                   <strong>{getTitle()}</strong>
@@ -518,14 +532,16 @@ export default function ProjectCard({ project, giveAssetType, changeAssetType, m
           <Grid item container xs alignContent="space-between">
             {isBreakpointLarge ? (
               <Grid item xs={12}>
-                <Link
-                  href={`#/give/projects/${project.slug}`}
-                  onClick={() => handleProjectDetailsButtonClick("Title Link")}
+                <div
+                  onClick={() => {
+                    changeComponent(project.slug);
+                    handleProjectDetailsButtonClick("Title Link");
+                  }}
                 >
                   <Typography variant="h4">
                     <strong>{getTitle()}</strong>
                   </Typography>
-                </Link>
+                </div>
               </Grid>
             ) : (
               <></>
@@ -542,8 +558,10 @@ export default function ProjectCard({ project, giveAssetType, changeAssetType, m
               </Grid>
               <Grid item xs={12} sm={6} lg={4}>
                 <Link
-                  href={`#/give/projects/${project.slug}`}
-                  onClick={() => handleProjectDetailsButtonClick("View Details Button")}
+                  onClick={() => {
+                    changeComponent(project.slug);
+                    handleProjectDetailsButtonClick("Title Link");
+                  }}
                 >
                   <TertiaryButton size="small" fullWidth>
                     <Trans>View Details</Trans>
@@ -589,7 +607,7 @@ export default function ProjectCard({ project, giveAssetType, changeAssetType, m
                   topLeft={
                     <Grid container spacing={2} alignItems="center">
                       <Grid item>
-                        <Link href={"#/give/"}>
+                        <Link onClick={() => changeComponent("give")}>
                           <ChevronLeft viewBox="6 6 12 12" style={{ width: "12px", height: "12px" }} />
                         </Link>
                       </Grid>

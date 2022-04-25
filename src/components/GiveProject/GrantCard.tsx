@@ -44,6 +44,7 @@ type GrantDetailsProps = {
   grant: Grant;
   giveAssetType: string;
   changeAssetType: ChangeAssetType;
+  changeComponent: (newComponent: string) => void;
   mode: GrantDetailsMode;
 };
 
@@ -54,7 +55,7 @@ const ZERO_NUMBER: DecimalBigNumber = new DecimalBigNumber("0");
 const DEFAULT_FORMAT = { decimals: DECIMAL_PLACES, format: true };
 const NO_DECIMALS_FORMAT = { decimals: 0, format: true };
 
-export default function GrantCard({ grant, giveAssetType, changeAssetType, mode }: GrantDetailsProps) {
+export default function GrantCard({ grant, giveAssetType, changeAssetType, changeComponent, mode }: GrantDetailsProps) {
   const { address, connected, connect, networkId, provider } = useWeb3Context();
   const { title, owner, shortDescription, details, photos, wallet, milestones, latestMilestoneCompleted } = grant;
   const [isUserDonating, setIsUserDonating] = useState(false);
@@ -439,7 +440,12 @@ export default function GrantCard({ grant, giveAssetType, changeAssetType, mode 
           <Grid container key={title} spacing={3}>
             {!isBreakpointLarge ? (
               <Grid item xs={12}>
-                <Link href={`#/give/grants/${grant.slug}`} onClick={() => handleGrantDetailsButtonClick("Title Link")}>
+                <Link
+                  onClick={() => {
+                    changeComponent(grant.slug);
+                    handleGrantDetailsButtonClick("Title Link");
+                  }}
+                >
                   <Typography variant="h4">
                     <strong>{getTitle()}</strong>
                   </Typography>
@@ -514,7 +520,7 @@ export default function GrantCard({ grant, giveAssetType, changeAssetType, mode 
                   topLeft={
                     <Grid container spacing={2} alignItems="center">
                       <Grid item>
-                        <Link href={"#/give/grants"}>
+                        <Link onClick={() => changeComponent("grants")}>
                           <ChevronLeft viewBox="6 6 12 12" style={{ width: "12px", height: "12px" }} />
                         </Link>
                       </Grid>

@@ -20,11 +20,12 @@ import data from "./projects.json";
 type CausesDashboardProps = {
   giveAssetType: string;
   changeAssetType: ChangeAssetType;
+  changeComponent: (newComponent: string) => void;
 };
 
 const ZERO_NUMBER = new DecimalBigNumber("0");
 
-export default function CausesDashboard({ giveAssetType, changeAssetType }: CausesDashboardProps) {
+export default function CausesDashboard({ giveAssetType, changeAssetType, changeComponent }: CausesDashboardProps) {
   const { address } = useWeb3Context();
   const [isCustomGiveModalOpen, setIsCustomGiveModalOpen] = useState(false);
   const { projects } = data;
@@ -53,6 +54,7 @@ export default function CausesDashboard({ giveAssetType, changeAssetType }: Caus
               project={project}
               giveAssetType={giveAssetType}
               changeAssetType={changeAssetType}
+              changeComponent={changeComponent}
               mode={ProjectDetailsMode.Card}
             />
           </Grid>

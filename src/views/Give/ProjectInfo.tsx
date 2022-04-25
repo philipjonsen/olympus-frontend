@@ -6,14 +6,16 @@ type ProjectInfoProps = {
   project: Project;
   giveAssetType: string;
   changeAssetType: ChangeAssetType;
+  changeComponent: (newComponent: string) => void;
 };
 
-export default function ProjectInfo({ project, giveAssetType, changeAssetType }: ProjectInfoProps) {
+export default function ProjectInfo({ project, giveAssetType, changeAssetType, changeComponent }: ProjectInfoProps) {
   return (
     <ProjectCard
       project={project}
       giveAssetType={giveAssetType}
       changeAssetType={changeAssetType}
+      changeComponent={changeComponent}
       mode={ProjectDetailsMode.Page}
     />
   );

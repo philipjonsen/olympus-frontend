@@ -6,14 +6,16 @@ type GrantInfoProps = {
   grant: Project;
   giveAssetType: string;
   changeAssetType: ChangeAssetType;
+  changeComponent: (newComponent: string) => void;
 };
 
-export default function GrantInfo({ grant, giveAssetType, changeAssetType }: GrantInfoProps) {
+export default function GrantInfo({ grant, giveAssetType, changeAssetType, changeComponent }: GrantInfoProps) {
   return (
     <GrantCard
       grant={grant}
       giveAssetType={giveAssetType}
       changeAssetType={changeAssetType}
+      changeComponent={changeComponent}
       mode={GrantDetailsMode.Page}
     />
   );

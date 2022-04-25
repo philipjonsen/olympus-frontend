@@ -55,6 +55,21 @@ function Give({ selectedIndex, component, type }: GiveProps) {
     setGiveAssetType(checked ? "gOHM" : "sOHM");
   };
 
+  const changeComponent = (newComponent: string) => {
+    if (newComponent === "give") {
+      history.push("/give/");
+      component = undefined;
+      setView(0);
+    } else if (newComponent === "grants") {
+      history.push("/give/grants");
+      component = undefined;
+      setView(1);
+    } else {
+      history.push(`/give/projects/${newComponent}`);
+      component = newComponent;
+    }
+  };
+
   const { grants } = grantData;
   const { projects } = projectData;
 
@@ -90,85 +105,93 @@ function Give({ selectedIndex, component, type }: GiveProps) {
 
   return (
     <>
-      <Grid container direction="column" alignItems="center">
-        <Grid item xs />
-        <Grid item xs={12} sm={10} md={10} lg={8}>
-          {(() => {
-            if (component && type && type === "project") {
-              return (
-                <ProjectInfo
-                  project={projects.filter(project => project.slug === component)[0]}
-                  giveAssetType={giveAssetType}
-                  changeAssetType={changeGiveAssetType}
-                />
-              );
-            } else if (component && type && type === "grant") {
-              return (
-                <GrantInfo
-                  grant={grants.filter(grant => grant.slug === component)[0]}
-                  giveAssetType={giveAssetType}
-                  changeAssetType={changeGiveAssetType}
-                />
-              );
-            } else {
-              return (
-                <>
-                  <Zoom in={true} onEntered={() => setZoomed(true)}>
-                    <Paper headerText={t`Give`} childPaperBackground={true} fullWidth className="no-container-padding">
-                      {!isSupportedChain(networkId) ? (
-                        <Typography variant="h6">
-                          Note: You are currently using an unsupported network. Please switch to Ethereum to experience
-                          the full functionality.
-                        </Typography>
-                      ) : (
-                        <></>
-                      )}
-                      {hasV1Assets && <CallToRedeem />}
-                      <Tabs
-                        key={String(zoomed)}
-                        centered
-                        value={view}
-                        className={`give-tab-buttons ${isBreakpointXS ? `give-tab-buttons-xs` : ``}`}
-                        onChange={changeView}
-                        aria-label="stake tabs"
-                      >
-                        <Tab label={t`Causes`} {...a11yProps(0)} />
-                        <Tab label={t`Grants`} {...a11yProps(1)} />
-                        <Tab label={t`My Donations`} {...a11yProps(2)} />
-                        <Tab label={t`Redeem`} {...a11yProps(3)} />
-                      </Tabs>
+      {(() => {
+        if (component && type && type === "project") {
+          return (
+            <ProjectInfo
+              project={projects.filter(project => project.slug === component)[0]}
+              giveAssetType={giveAssetType}
+              changeAssetType={changeGiveAssetType}
+              changeComponent={changeComponent}
+            />
+          );
+        } else if (component && type && type === "grant") {
+          return (
+            <GrantInfo
+              grant={grants.filter(grant => grant.slug === component)[0]}
+              giveAssetType={giveAssetType}
+              changeAssetType={changeGiveAssetType}
+              changeComponent={changeComponent}
+            />
+          );
+        } else {
+          return (
+            <Grid container direction="column" alignItems="center">
+              <Grid item xs />
+              <Grid item xs={12} sm={10} md={10} lg={8}>
+                <Zoom in={true} onEntered={() => setZoomed(true)}>
+                  <Paper headerText={t`Give`} childPaperBackground={true} fullWidth className="no-container-padding">
+                    {!isSupportedChain(networkId) ? (
+                      <Typography variant="h6">
+                        Note: You are currently using an unsupported network. Please switch to Ethereum to experience
+                        the full functionality.
+                      </Typography>
+                    ) : (
+                      <></>
+                    )}
+                    {hasV1Assets && <CallToRedeem />}
+                    <Tabs
+                      key={String(zoomed)}
+                      centered
+                      value={view}
+                      className={`give-tab-buttons ${isBreakpointXS ? `give-tab-buttons-xs` : ``}`}
+                      onChange={changeView}
+                      aria-label="stake tabs"
+                    >
+                      <Tab label={t`Causes`} {...a11yProps(0)} />
+                      <Tab label={t`Grants`} {...a11yProps(1)} />
+                      <Tab label={t`My Donations`} {...a11yProps(2)} />
+                      <Tab label={t`Redeem`} {...a11yProps(3)} />
+                    </Tabs>
 
-                      <TabPanel value={view} index={0}>
-                        <GohmToggle giveAssetType={giveAssetType} changeAssetType={changeGiveAssetType} />
-                        <CausesDashboard giveAssetType={giveAssetType} changeAssetType={changeGiveAssetType} />
-                      </TabPanel>
-                      <TabPanel value={view} index={1}>
-                        <GohmToggle giveAssetType={giveAssetType} changeAssetType={changeGiveAssetType} />
-                        <GrantsDashboard giveAssetType={giveAssetType} changeAssetType={changeGiveAssetType} />
-                      </TabPanel>
-                      <TabPanel value={view} index={2}>
-                        {/* We have a button to switch tabs in this child component, so need to pass the handler. */}
-                        <YieldRecipients
-                          changeView={buttonChangeView}
-                          giveAssetType={giveAssetType}
-                          changeAssetType={changeGiveAssetType}
-                        />
-                      </TabPanel>
-                      <TabPanel value={view} index={3}>
-                        <RedeemYield />
-                      </TabPanel>
-                    </Paper>
-                  </Zoom>
-                  <Zoom in={true}>
-                    <GiveInfo />
-                  </Zoom>
-                </>
-              );
-            }
-          })()}
-        </Grid>
-        <Grid item xs />
-      </Grid>
+                    <TabPanel value={view} index={0}>
+                      <GohmToggle giveAssetType={giveAssetType} changeAssetType={changeGiveAssetType} />
+                      <CausesDashboard
+                        giveAssetType={giveAssetType}
+                        changeAssetType={changeGiveAssetType}
+                        changeComponent={changeComponent}
+                      />
+                    </TabPanel>
+                    <TabPanel value={view} index={1}>
+                      <GohmToggle giveAssetType={giveAssetType} changeAssetType={changeGiveAssetType} />
+                      <GrantsDashboard
+                        giveAssetType={giveAssetType}
+                        changeAssetType={changeGiveAssetType}
+                        changeComponent={changeComponent}
+                      />
+                    </TabPanel>
+                    <TabPanel value={view} index={2}>
+                      {/* We have a button to switch tabs in this child component, so need to pass the handler. */}
+                      <YieldRecipients
+                        changeView={buttonChangeView}
+                        giveAssetType={giveAssetType}
+                        changeAssetType={changeGiveAssetType}
+                      />
+                    </TabPanel>
+                    <TabPanel value={view} index={3}>
+                      <RedeemYield />
+                    </TabPanel>
+                  </Paper>
+                </Zoom>
+                <Zoom in={true}>
+                  <GiveInfo />
+                </Zoom>
+              </Grid>
+              <Grid item xs />
+            </Grid>
+          );
+        }
+      })()}
     </>
   );
 }

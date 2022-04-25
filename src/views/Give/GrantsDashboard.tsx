@@ -19,11 +19,12 @@ import { useGive } from "./hooks/useGive";
 type GrantsDashboardProps = {
   giveAssetType: string;
   changeAssetType: ChangeAssetType;
+  changeComponent: (newComponent: string) => void;
 };
 
 const ZERO_NUMBER = new DecimalBigNumber("0");
 
-export default function GrantsDashboard({ giveAssetType, changeAssetType }: GrantsDashboardProps) {
+export default function GrantsDashboard({ giveAssetType, changeAssetType, changeComponent }: GrantsDashboardProps) {
   const [isCustomGiveModalOpen, setIsCustomGiveModalOpen] = useState(false);
   const grants: Grant[] = data.grants;
 
@@ -53,6 +54,7 @@ export default function GrantsDashboard({ giveAssetType, changeAssetType }: Gran
           grant={grant}
           giveAssetType={giveAssetType}
           changeAssetType={changeAssetType}
+          changeComponent={changeComponent}
           mode={GrantDetailsMode.Card}
         />
       );
