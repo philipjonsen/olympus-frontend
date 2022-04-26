@@ -512,7 +512,7 @@ export default function ProjectCard({
         <Grid container key={title} spacing={3}>
           {!isBreakpointLarge ? (
             <Grid item xs={12}>
-              <Link
+              <div
                 onClick={() => {
                   changeComponent(project.slug);
                   handleProjectDetailsButtonClick("Title Link");
@@ -521,7 +521,7 @@ export default function ProjectCard({
                 <Typography variant="h4">
                   <strong>{getTitle()}</strong>
                 </Typography>
-              </Link>
+              </div>
             </Grid>
           ) : (
             <></>
@@ -557,7 +557,7 @@ export default function ProjectCard({
                 {renderGoalCompletion()}
               </Grid>
               <Grid item xs={12} sm={6} lg={4}>
-                <Link
+                <div
                   onClick={() => {
                     changeComponent(project.slug);
                     handleProjectDetailsButtonClick("Title Link");
@@ -566,7 +566,7 @@ export default function ProjectCard({
                   <TertiaryButton size="small" fullWidth>
                     <Trans>View Details</Trans>
                   </TertiaryButton>
-                </Link>
+                </div>
               </Grid>
             </Grid>
           </Grid>

@@ -48,6 +48,8 @@ function Give({ selectedIndex, component, type }: GiveProps) {
   const { address, networkId } = useWeb3Context();
   const [zoomed, setZoomed] = useState(false);
   const [view, setView] = useState(selectedIndex || 0);
+  const [currComponent, setCurrComponent] = useState(component || "");
+  const [currType, setCurrType] = useState(type ? type : "");
 
   const [giveAssetType, setGiveAssetType] = useState<"sOHM" | "gOHM">("sOHM");
 
@@ -57,16 +59,14 @@ function Give({ selectedIndex, component, type }: GiveProps) {
 
   const changeComponent = (newComponent: string) => {
     if (newComponent === "give") {
-      history.push("/give/");
-      component = undefined;
-      setView(0);
+      setCurrComponent("");
+      buttonChangeView(0);
     } else if (newComponent === "grants") {
-      history.push("/give/grants");
-      component = undefined;
-      setView(1);
+      setCurrComponent("");
+      buttonChangeView(1);
     } else {
-      history.push(`/give/projects/${newComponent}`);
-      component = newComponent;
+      setCurrType("project");
+      setCurrComponent(newComponent);
     }
   };
 
@@ -106,19 +106,19 @@ function Give({ selectedIndex, component, type }: GiveProps) {
   return (
     <>
       {(() => {
-        if (component && type && type === "project") {
+        if (currComponent != "" && currType != "" && currType === "project") {
           return (
             <ProjectInfo
-              project={projects.filter(project => project.slug === component)[0]}
+              project={projects.filter(project => project.slug === currComponent)[0]}
               giveAssetType={giveAssetType}
               changeAssetType={changeGiveAssetType}
               changeComponent={changeComponent}
             />
           );
-        } else if (component && type && type === "grant") {
+        } else if (currComponent != "" && currType != "" && currType === "grant") {
           return (
             <GrantInfo
-              grant={grants.filter(grant => grant.slug === component)[0]}
+              grant={grants.filter(grant => grant.slug === currComponent)[0]}
               giveAssetType={giveAssetType}
               changeAssetType={changeGiveAssetType}
               changeComponent={changeComponent}
