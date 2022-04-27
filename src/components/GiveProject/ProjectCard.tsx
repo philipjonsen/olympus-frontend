@@ -10,6 +10,7 @@ import MarkdownIt from "markdown-it";
 import { useEffect, useMemo, useState } from "react";
 import Countdown from "react-countdown";
 import ReactGA from "react-ga";
+import { useHistory } from "react-router-dom";
 import { Project } from "src/components/GiveProject/project.type";
 import { DecimalBigNumber } from "src/helpers/DecimalBigNumber/DecimalBigNumber";
 import { isSupportedChain } from "src/helpers/GiveHelpers";
@@ -82,6 +83,7 @@ export default function ProjectCard({
     },
   }));
   const classes = useStyles();
+  const history = useHistory();
   const { address, connected, connect, networkId } = useWeb3Context();
   const { title, owner, shortDescription, details, finishDate, photos, wallet, depositGoal } = project;
   const [isUserDonating, setIsUserDonating] = useState(false);
@@ -536,6 +538,7 @@ export default function ProjectCard({
                   onClick={() => {
                     changeComponent(project.slug);
                     handleProjectDetailsButtonClick("Title Link");
+                    history.push(`/give/projects/${project.slug}`);
                   }}
                 >
                   <Typography variant="h4">
@@ -561,6 +564,7 @@ export default function ProjectCard({
                   onClick={() => {
                     changeComponent(project.slug);
                     handleProjectDetailsButtonClick("Title Link");
+                    history.push(`/give/projects/${project.slug}`);
                   }}
                 >
                   <TertiaryButton size="small" fullWidth>
@@ -607,7 +611,12 @@ export default function ProjectCard({
                   topLeft={
                     <Grid container spacing={2} alignItems="center">
                       <Grid item>
-                        <Link onClick={() => changeComponent("give")}>
+                        <Link
+                          onClick={() => {
+                            changeComponent("give");
+                            history.push(`/give/`);
+                          }}
+                        >
                           <ChevronLeft viewBox="6 6 12 12" style={{ width: "12px", height: "12px" }} />
                         </Link>
                       </Grid>
