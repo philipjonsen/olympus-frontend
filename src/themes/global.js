@@ -1,12 +1,12 @@
-import fonts from "./fonts";
+import fonts from './fonts'
 
 const breakpointValues = {
   xs: 0,
   sm: 596,
   md: 800,
   lg: 1000,
-  xl: 1333,
-};
+  xl: 1333
+}
 
 // replace above with this later
 // const breakpointValues = {
@@ -21,54 +21,54 @@ const breakpointValues = {
  * @returns modified rgbaString
  */
 export const handleBackdropFilter = rgbaString => {
-  const supported = CSS.supports("(-webkit-backdrop-filter: none)") || CSS.supports("(backdrop-filter: none)");
+  const supported = CSS.supports('(-webkit-backdrop-filter: none)') || CSS.supports('(backdrop-filter: none)')
   if (!supported) {
     // make the opacity == 0.9;
-    rgbaString = rgbaString.replace(/[\d\.]+\)$/g, "0.9)");
+    rgbaString = rgbaString.replace(/[\d\.]+\)$/g, '0.9)')
   }
-  return rgbaString;
-};
+  return rgbaString
+}
 
 const commonSettings = {
-  direction: "ltr",
+  direction: 'ltr',
   typography: {
     fontSize: 16,
-    fontFamily: "Square",
+    fontFamily: 'Square',
     h1: {
-      fontSize: "3.3rem",
+      fontSize: '3.3rem'
     },
     h2: {
-      fontSize: "2.3rem",
+      fontSize: '2.3rem',
       fontWeight: 600,
-      letterSpacing: "1.3px",
+      letterSpacing: '1.3px'
     },
     h3: {
-      fontSize: "1.75rem",
+      fontSize: '1.75rem'
     },
     h4: {
-      fontSize: "1.5rem",
+      fontSize: '1.5rem'
     },
     h5: {
-      fontSize: "1.25rem",
-      letterSpacing: "0.4px",
+      fontSize: '1.25rem',
+      letterSpacing: '0.4px'
     },
     h6: {
-      fontSize: "1rem",
+      fontSize: '1rem'
     },
     body1: {
-      fontSize: "0.875rem",
+      fontSize: '0.875rem',
       fontWeight: 500,
-      lineHeight: 1,
+      lineHeight: 1
     },
     body2: {
-      fontSize: "0.75rem",
+      fontSize: '0.75rem',
       fontWeight: 400,
-      lineHeight: 1,
+      lineHeight: 1
     },
     button: {
-      textTransform: "none",
-      fontSize: "1.25rem",
-    },
+      textTransform: 'none',
+      fontSize: '1.25rem'
+    }
   },
   overrides: {
     MuiSwitch: {
@@ -76,234 +76,234 @@ const commonSettings = {
         width: 28,
         height: 16,
         padding: 0,
-        display: "flex",
+        display: 'flex'
       },
       switchBase: {
         padding: 2,
-        "&$checked": {
-          transform: "translateX(12px)",
-          "& + $track": {
-            opacity: 1,
-          },
-        },
+        '&$checked': {
+          transform: 'translateX(12px)',
+          '& + $track': {
+            opacity: 1
+          }
+        }
       },
       track: {
         borderRadius: 16 / 2,
-        opacity: 1,
+        opacity: 1
       },
       thumb: {
         width: 12,
         height: 12,
-        boxShadow: "none",
-      },
+        boxShadow: 'none'
+      }
     },
     MuiCssBaseline: {
-      "@global": {
-        "@font-face": fonts,
+      '@global': {
+        '@font-face': fonts,
         breakpoints: { values: breakpointValues },
         body: {
-          backgroundRepeat: "no-repeat",
-          backgroundAttachment: "fixed",
-        },
-      },
+          backgroundRepeat: 'no-repeat',
+          backgroundAttachment: 'fixed'
+        }
+      }
     },
     MuiToolbar: {
       root: {
-        justifyContent: "flex-end",
-      },
+        justifyContent: 'flex-end'
+      }
     },
     MuiPaper: {
       root: {
-        backdropFilter: "blur(33px)",
-        "&.ohm-card": {
-          padding: "20px 30px 30px 30px",
-          borderRadius: "var(--ohm-card-border-radius)",
-          maxWidth: "833px",
-          width: "97%",
-          marginBottom: "1.8rem",
-          overflow: "hidden",
+        backdropFilter: 'blur(33px)',
+        '&.ohm-card': {
+          padding: '20px 30px 30px 30px',
+          borderRadius: 'var(--ohm-card-border-radius)',
+          maxWidth: '833px',
+          width: '97%',
+          marginBottom: '1.8rem',
+          overflow: 'hidden'
         },
-        "&.ohm-menu": {
-          padding: "22px 0px",
-          borderRadius: "10px",
-          margin: "0px",
+        '&.ohm-menu': {
+          padding: '22px 0px',
+          borderRadius: '10px',
+          margin: '0px'
         },
-        "&.ohm-chart-card": {
-          padding: "20px 0px",
-          whiteSpace: "nowrap",
-          maxWidth: "700px",
-          width: "97%",
-          marginBottom: "1.8rem",
-        },
-      },
+        '&.ohm-chart-card': {
+          padding: '20px 0px',
+          whiteSpace: 'nowrap',
+          maxWidth: '700px',
+          width: '97%',
+          marginBottom: '1.8rem'
+        }
+      }
     },
     MuiContainer: {
       root: {
-        backgroundColor: "transparent",
-        flexGrow: 1,
-      },
+        backgroundColor: 'transparent',
+        flexGrow: 1
+      }
     },
     MuiLink: {
       root: {
-        textUnderlineOffset: ".23rem",
-        cursor: "pointer",
-        "&:hover": {
-          textDecoration: "none",
-          underline: "none",
-        },
-      },
+        textUnderlineOffset: '.23rem',
+        cursor: 'pointer',
+        '&:hover': {
+          textDecoration: 'none',
+          underline: 'none'
+        }
+      }
     },
     MuiTable: {
       root: {
-        margin: "10px 0px",
-      },
+        margin: '10px 0px'
+      }
     },
     MuiTableCell: {
       root: {
         borderBottom: 0,
-        fontSize: "1rem",
+        fontSize: '1rem'
       },
       head: {
-        color: "#999999",
-      },
+        color: '#999999'
+      }
     },
     MuiDrawer: {
       root: {
-        width: "312px",
-        flexShrink: 0,
+        width: '312px',
+        flexShrink: 0
       },
       paper: {
-        width: "inherit",
+        width: 'inherit',
         // backdropFilter: "blur(33px)",
-        backgroundColor: "inherit",
+        backgroundColor: 'inherit',
         padding: 0,
-        zIndex: 7,
-      },
+        zIndex: 7
+      }
     },
     MuiBackdrop: {
       root: {
         // backdropFilter: "blur(15px)",
-        zIndex: 0,
-      },
+        zIndex: 0
+      }
     },
     MuiToggleButton: {
       root: {
         border: 0,
-        borderRadius: "5px",
-        margin: "8px",
-        padding: "10px",
-      },
+        borderRadius: '5px',
+        margin: '8px',
+        padding: '10px'
+      }
     },
     MuiButton: {
       root: {
-        borderRadius: "5px",
-        textTransform: "none",
-        textDecoration: "none",
-        whiteSpace: "nowrap",
-        minWidth: "max-content",
-        maxHeight: "40px",
+        borderRadius: '5px',
+        textTransform: 'none',
+        textDecoration: 'none',
+        whiteSpace: 'nowrap',
+        minWidth: 'max-content',
+        maxHeight: '40px'
       },
       containedPrimary: {
         border: 0,
-        fontWeight: "500",
+        fontWeight: '500'
       },
       containedSecondary: {
-        fontWeight: "400",
+        fontWeight: '400'
       },
       outlinedPrimary: {
-        height: "33px",
-        padding: "9px 20px",
+        height: '33px',
+        padding: '9px 20px'
       },
       outlinedSecondary: {
-        textTransform: "none",
-        textDecoration: "none",
-        height: "33px",
-        fontSize: "1.1em",
-        padding: "9px 20px",
+        textTransform: 'none',
+        textDecoration: 'none',
+        height: '33px',
+        fontSize: '1.1em',
+        padding: '9px 20px'
       },
       text: {
-        "&:hover": {
-          backgroundColor: "#00000000",
-        },
+        '&:hover': {
+          backgroundColor: '#00000000'
+        }
       },
       textSecondary: {
-        textTransform: "none",
-        textDecoration: "none",
-        padding: "2px 2px",
-        "&:hover": {
-          backgroundColor: "#00000000",
-        },
-      },
+        textTransform: 'none',
+        textDecoration: 'none',
+        padding: '2px 2px',
+        '&:hover': {
+          backgroundColor: '#00000000'
+        }
+      }
     },
     MuiIconButton: {
       root: {
-        "&:hover": {
-          backgroundColor: "#00000000",
-        },
-      },
+        '&:hover': {
+          backgroundColor: '#00000000'
+        }
+      }
     },
     MuiInputBase: {
       root: {
-        height: "43px",
-        padding: "5px",
-      },
+        height: '43px',
+        padding: '5px'
+      }
     },
     MuiInputLabel: {
       outlined: {
-        transform: "translate(16px, 14px) scale(1)",
-      },
+        transform: 'translate(16px, 14px) scale(1)'
+      }
     },
     MuiTabs: {
       root: {
-        minHeight: "40px",
-        height: "40px",
-      },
+        minHeight: '40px',
+        height: '40px'
+      }
     },
     MuiTab: {
       root: {
-        minWidth: "min-content !important",
-        padding: "0px",
-        margin: "0px 10px",
+        minWidth: 'min-content !important',
+        padding: '0px',
+        margin: '0px 10px',
         fontWeight: 400,
-        fontSize: "24px",
-        fontStyle: "normal",
-        lineHeight: "24px",
-      },
-    },
+        fontSize: '24px',
+        fontStyle: 'normal',
+        lineHeight: '24px'
+      }
+    }
   },
   props: {
     MuiButtonBase: {
-      disableRipple: true,
+      disableRipple: true
     },
     MuiButton: {
       disableElevation: true,
       disableFocusRipple: true,
-      disableRipple: true,
+      disableRipple: true
     },
     MuiTextButton: {
       disableFocusRipple: true,
-      disableRipple: true,
+      disableRipple: true
     },
     MuiPaper: {
-      elevation: 0,
+      elevation: 0
     },
     MuiTypograph: {
-      gutterBottom: true,
+      gutterBottom: true
     },
     MuiLink: {
-      underline: "none",
+      underline: 'none'
     },
     MuiSvgIcon: {
-      viewBox: "0 0 20 20",
-      fontSize: "small",
+      viewBox: '0 0 20 20',
+      fontSize: 'small'
     },
     MuiBackdrop: {
-      transitionDuration: 300,
+      transitionDuration: 300
     },
     MuiPopover: {
-      transitionDuration: 300,
-    },
-  },
-};
+      transitionDuration: 300
+    }
+  }
+}
 
-export default commonSettings;
+export default commonSettings
